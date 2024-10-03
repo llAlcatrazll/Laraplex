@@ -2,27 +2,33 @@
 
 namespace App\Filament\Resources;
 
-use App\Filament\Resources\OfficeResource\Pages;
-use App\Models\Office;
-use Filament\Forms;
+use App\Filament\Resources\EquipmentBookingResource\Pages;
+use App\Models\EquipmentBooking;
+use Filament\Forms\Components\DatePicker;
+use Filament\Forms\Components\TextInput;
+use Filament\Forms\Components\TimePicker;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
 
-class OfficeResource extends Resource
+class EquipmentBookingResource extends Resource
 {
-    protected static ?string $model = Office::class;
+    protected static ?string $model = EquipmentBooking::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
     public static function form(Form $form): Form
     {
         return $form
+            ->columns(3)
             ->schema([
-                //
-                Forms\Components\TextInput::make('name'),
-                Forms\Components\TextInput::make('acronym'),
+
+                TextInput::make('booker'),
+                TextInput::make('equipment_name'),
+                DatePicker::make('date'),
+                TimePicker::make('starting_time'),
+                TimePicker::make('ending_time'),
             ]);
     }
 
@@ -31,10 +37,6 @@ class OfficeResource extends Resource
         return $table
             ->columns([
                 //
-                Tables\Columns\TextColumn::make('name')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('acronym')
-                    ->searchable(),
             ])
             ->filters([
                 //
@@ -59,9 +61,9 @@ class OfficeResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListOffices::route('/'),
-            'create' => Pages\CreateOffice::route('/create'),
-            'edit' => Pages\EditOffice::route('/{record}/edit'),
+            'index' => Pages\ListEquipmentBookings::route('/'),
+            'create' => Pages\CreateEquipmentBooking::route('/create'),
+            'edit' => Pages\EditEquipmentBooking::route('/{record}/edit'),
         ];
     }
 }

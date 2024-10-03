@@ -1,14 +1,14 @@
 <?php
 
-namespace App\Filament\Resources\OfficeResource\Pages;
+namespace App\Filament\Resources\BookingResource\Pages;
 
-use App\Filament\Resources\OfficeResource;
+use App\Filament\Resources\BookingResource;
 use Filament\Actions;
 use Filament\Resources\Pages\EditRecord;
 
-class EditOffice extends EditRecord
+class EditBooking extends EditRecord
 {
-    protected static string $resource = OfficeResource::class;
+    protected static string $resource = BookingResource::class;
 
     protected function getHeaderActions(): array
     {
