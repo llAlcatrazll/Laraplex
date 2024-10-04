@@ -1,9 +1,11 @@
 <?php
 
-namespace App\Filament\Resources;
+namespace App\Filament\Agso\Resources;
 
-use App\Filament\Resources\BookingResource\Pages;
-use App\Models\Booking;
+use App\Filament\Actions\Tables\ApproveBookingAction;
+use App\Filament\Actions\Tables\DeclineBookingAction;
+use App\Filament\Agso\Resources\VenueBookingResource\Pages;
+use App\Models\VenueBooking;
 use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\Section;
 use Filament\Forms\Components\Select;
@@ -12,26 +14,27 @@ use Filament\Forms\Components\TimePicker;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
+use Filament\Tables\Actions\ActionGroup;
+use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 
-class BookingResource extends Resource
+class VenueBookingResource extends Resource
 {
-    protected static ?string $model = Booking::class;
+    protected static ?string $model = VenueBooking::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
     public static function form(Form $form): Form
     {
         return $form
-        // 'deleted',
             ->schema([
                 Section::make('Date')
                     ->columns(3)
                     ->schema([
-                        DatePicker::make('event_date'),
-                        TimePicker::make('starting_time'),
+                        DatePicker::make('event_date')->default(now()),
+                        TimePicker::make('starting_time')->default(now()),
                         // limit the time
-                        TimePicker::make('ending_time'),
+                        TimePicker::make('ending_time')->default(now()),
                     ]),
                 Section::make('Event and Venue')
                     ->columns(2)
@@ -64,37 +67,42 @@ class BookingResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('college')
-                    ->sortable()
+                //
+                TextColumn::make('booker')
                     ->searchable(),
-                Tables\Columns\TextColumn::make('club')
-                    ->sortable()
+                TextColumn::make('college')
                     ->searchable(),
-                Tables\Columns\TextColumn::make('event_facility')
-                    ->sortable()
+                TextColumn::make('club')
                     ->searchable(),
-                Tables\Columns\TextColumn::make('event_date')
-                    ->sortable()
+                TextColumn::make('eventname'),
+                TextColumn::make('event_facility')
                     ->searchable(),
-                Tables\Columns\TextColumn::make('starting_time')
-                    ->sortable()
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('ending_time')
-                    ->sortable()
-                    ->searchable(),
+                TextColumn::make('event_date'),
+                TextColumn::make('starting_time'),
+                TextColumn::make('ending_time'),
+                TextColumn::make('status')
+                    ->badge(),
             ])
             ->filters([
                 //
             ])
             ->actions([
-                Tables\Actions\EditAction::make(),
-                Tables\Actions\ViewAction::make(),
+                Tables\Actions\EditAction::make()->color('success'),
+                ActionGroup::make([
+                    ApproveBookingAction::make(),
+                    DeclineBookingAction::make(),
+                ]),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
                     Tables\Actions\DeleteBulkAction::make(),
                 ]),
             ]);
+    }
+
+    public static function canCreate(): bool
+    {
+        return false;
     }
 
     public static function getRelations(): array
@@ -107,9 +115,9 @@ class BookingResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListBookings::route('/'),
-            'create' => Pages\CreateBooking::route('/create'),
-            'edit' => Pages\EditBooking::route('/{record}/edit'),
+            'index' => Pages\ListVenueBookings::route('/'),
+            // 'create' => Pages\CreateVenueBooking::route('/create'),
+            'edit' => Pages\EditVenueBooking::route('/{record}/edit'),
         ];
     }
 }

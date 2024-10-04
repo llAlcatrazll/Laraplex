@@ -11,22 +11,28 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('vehicle_bookings', function (Blueprint $table) {
+        Schema::create('actions', function (Blueprint $table) {
             $table->id();
-            $table->string('vehicle_type');
-            $table->string('requestor');
-            $table->date('date');
-            $table->string('department');
-            $table->string('purpose');
+            $table->id('user_id');
+            $table->id('status');
+            $table->id('table');
             $table->timestamps();
         });
     }
 
+    /*
+          'request_id',
+            'user_id',
+            'status',
+            'response',
+            'responded_at',
+            'remarks',
+            'time', */
     /**
      * Reverse the migrations.
      */
     public function down(): void
     {
-        Schema::dropIfExists('vehicle_bookings');
+        Schema::dropIfExists('actions');
     }
 };

@@ -13,6 +13,17 @@ return new class extends Migration
     {
         Schema::create('venue_bookings', function (Blueprint $table) {
             $table->id();
+            $table->string('booker');
+            $table->string('eventname');
+            $table->date('event_date');
+            $table->time('starting_time');
+            $table->time('ending_time');
+            $table->string('event_facility');
+            $table->string('college')->default(null);
+            $table->string('club');
+            $table->string('status')->default('pending');
+            // pending | accepted | denied
+            $table->boolean('deleted')->default('0');
             $table->timestamps();
         });
     }

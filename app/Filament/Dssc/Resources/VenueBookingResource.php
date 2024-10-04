@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Filament\Resources;
+namespace App\Filament\Dssc\Resources;
 
-use App\Filament\Resources\VenueBookingResource\Pages;
+use App\Filament\Dssc\Resources\VenueBookingResource\Pages;
 use App\Models\VenueBooking;
 use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\Section;
@@ -64,6 +64,7 @@ class VenueBookingResource extends Resource
     {
         return $table
             ->columns([
+                //
                 TextColumn::make('booker'),
                 TextColumn::make('college'),
                 TextColumn::make('club'),
@@ -78,7 +79,6 @@ class VenueBookingResource extends Resource
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
-                Tables\Actions\ViewAction::make(),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([

@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Filament\Resources;
+namespace App\Filament\Agso\Resources;
 
-use App\Filament\Resources\VehicleBookingResource\Pages;
+use App\Filament\Agso\Resources\VehicleBookingResource\Pages;
 use App\Models\VehicleBooking;
 use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\Select;
@@ -29,10 +29,13 @@ class VehicleBookingResource extends Resource
                         'Hi-Ace' => 'HI-ACE',
                         'Innova (Manual)' => 'INNOVA-MANUAL',
                     ]),
-                TextInput::make('requestor'),
+                TextInput::make('requestor')
+                    ->placeholder('Juan De la Cruz'),
                 DatePicker::make('date'),
-                TextInput::make('department'),
-                TextInput::make('purpose'),
+                TextInput::make('department')
+                    ->placeholder('Department or Organization'),
+                TextInput::make('purpose')
+                    ->placeholder('What is this vehicle gonna be used for'),
             ]);
     }
 
@@ -40,7 +43,6 @@ class VehicleBookingResource extends Resource
     {
         return $table
             ->columns([
-                //
                 TextColumn::make('vehicle_type'),
                 TextColumn::make('requestor'),
                 TextColumn::make('date'),
@@ -52,7 +54,6 @@ class VehicleBookingResource extends Resource
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
-                Tables\Actions\ViewAction::make(),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
