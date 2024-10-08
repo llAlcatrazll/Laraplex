@@ -2,6 +2,7 @@
 
 namespace App\Filament\Agso\Resources;
 
+use App\Enums\VehicleType;
 use App\Filament\Agso\Resources\VehicleBookingResource\Pages;
 use App\Models\VehicleBooking;
 use Filament\Forms\Components\DatePicker;
@@ -24,14 +25,11 @@ class VehicleBookingResource extends Resource
         return $form
             ->schema([
                 Select::make('vehicle_type')
-                    ->options([
-                        'Isuzu' => 'ISUZU',
-                        'Hi-Ace' => 'HI-ACE',
-                        'Innova (Manual)' => 'INNOVA-MANUAL',
-                    ]),
+                    ->options(VehicleType::class),
                 TextInput::make('requestor')
                     ->placeholder('Juan De la Cruz'),
-                DatePicker::make('date'),
+                DatePicker::make('date')
+                    ->format('m/d/Y'),
                 TextInput::make('department')
                     ->placeholder('Department or Organization'),
                 TextInput::make('purpose')

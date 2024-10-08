@@ -3,6 +3,7 @@
 namespace App\Filament\Actions\Traits;
 
 use App\Enums\VenueBookingStatus;
+use App\Models\VenueBooking;
 
 trait ApproveBookingTrait
 {
@@ -14,7 +15,14 @@ trait ApproveBookingTrait
         $this->name ??= 'approve';
 
         $this->color('success');
-        // $this->icon('gmdi-approval-o');
+
+        $this->visible(function (VenueBooking $record) {
+            // dd($record->status);
+
+            return $record->status === VenueBookingStatus::APPROVED;
+        });
+
+        $this->icon(VenueBookingStatus::APPROVED->getIcon());
 
         $this->action(function ($record) {
             $record->update([

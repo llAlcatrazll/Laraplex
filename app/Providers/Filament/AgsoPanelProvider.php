@@ -44,11 +44,7 @@ class AgsoPanelProvider extends PanelProvider
                 // Widgets\AccountWidget::class,
                 // Widgets\FilamentInfoWidget::class,
                 // BookingChart::class,
-                BookingCalendarWidget::class,
-            ])
-            ->navigationGroups([
-                'Manage Bookings',
-                'Reports & Analytics',
+                // BookingCalendarWidget::class,
             ])
             ->middleware([
                 EncryptCookies::class,

@@ -14,7 +14,8 @@ trait DeclineBookingTrait
         $this->name ??= 'decline';
 
         $this->color('danger');
-        // $this->icon('gmdi-approval-o');
+
+        $this->icon(VenueBookingStatus::DECLINED->getIcon());
 
         $this->action(function ($record) {
             $record->update([

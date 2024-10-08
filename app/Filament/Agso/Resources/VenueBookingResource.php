@@ -77,9 +77,12 @@ class VenueBookingResource extends Resource
                 TextColumn::make('eventname'),
                 TextColumn::make('event_facility')
                     ->searchable(),
-                TextColumn::make('event_date'),
-                TextColumn::make('starting_time'),
-                TextColumn::make('ending_time'),
+                TextColumn::make('event_date')
+                    ->formatStateUsing(fn ($state) => \Carbon\Carbon::parse($state)->format('F j, Y (l)')),
+                TextColumn::make('starting_time')
+                    ->formatStateUsing(fn ($state) => \Carbon\Carbon::parse($state)->format('h:i A')),
+                TextColumn::make('ending_time')
+                    ->formatStateUsing(fn ($state) => \Carbon\Carbon::parse($state)->format('h:i A')),
                 TextColumn::make('status')
                     ->badge(),
             ])

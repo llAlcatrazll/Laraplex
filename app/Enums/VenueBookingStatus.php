@@ -26,6 +26,15 @@ enum VenueBookingStatus: string
         };
     }
 
+    public function getIcon(): ?string
+    {
+        return match ($this) {
+            self::APPROVED => 'heroicon-c-check-badge',
+            self::DECLINED => 'heroicon-c-x-circle',
+            self::PENDING => 'heroicon-o-check',
+        };
+    }
+
     public static function options(): array
     {
         return array_map(fn ($case) => $case->value.' - '.$case->getDescription(), self::cases());
