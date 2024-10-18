@@ -16,11 +16,11 @@ trait ApproveBookingTrait
 
         $this->color('success');
 
-        $this->visible(function (VenueBooking $record) {
-            // dd($record->status);
+        // $this->visible(function (VenueBooking $record) {
+        //     // dd($record->status);
 
-            return $record->status === VenueBookingStatus::APPROVED;
-        });
+        //     return $record->status === VenueBookingStatus::APPROVED;
+        // });
 
         $this->icon(VenueBookingStatus::APPROVED->getIcon());
 

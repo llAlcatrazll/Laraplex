@@ -3,6 +3,7 @@
 namespace App\Filament\Actions\Traits;
 
 use App\Enums\VenueBookingStatus;
+use Filament\Forms\Components\TextInput;
 
 trait DeclineBookingTrait
 {
@@ -16,6 +17,8 @@ trait DeclineBookingTrait
         $this->color('danger');
 
         $this->icon(VenueBookingStatus::DECLINED->getIcon());
+
+        $this->form([TextInput::make('remarks')->placeholder('Reason for declining this request')]);
 
         $this->action(function ($record) {
             $record->update([

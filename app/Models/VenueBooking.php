@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Enums\VenueBookingStatus;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -20,4 +21,13 @@ class VenueBooking extends Model
         'status',
         'club',
     ];
+
+    protected $casts = [
+        'status' => VenueBookingStatus::class, // Casts the status to the VenueBookingStatus enum
+    ];
+
+    public function actions()
+    {
+        return $this->morphMany(Action::class, 'bookable');
+    }
 }

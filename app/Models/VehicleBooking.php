@@ -16,4 +16,9 @@ class VehicleBooking extends Model
         'department',
         'purpose',
     ];
+
+    public function actions()
+    {
+        return $this->morphMany(Action::class, 'bookable');
+    }
 }

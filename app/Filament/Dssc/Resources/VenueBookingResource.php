@@ -69,7 +69,8 @@ class VenueBookingResource extends Resource
                 TextColumn::make('college'),
                 TextColumn::make('club'),
                 TextColumn::make('eventname'),
-                TextColumn::make('event_facility'),
+                TextColumn::make('event_facility')
+                    ->searchable(),
                 TextColumn::make('event_date'),
                 TextColumn::make('starting_time'),
                 TextColumn::make('ending_time'),

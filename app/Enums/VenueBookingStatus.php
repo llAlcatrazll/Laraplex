@@ -11,9 +11,9 @@ enum VenueBookingStatus: string
     public function getDescription(): ?string
     {
         return match ($this) {
-            self::APPROVED => 'This request is t',
-            self::DECLINED => 'Low Priority',
-            self::PENDING => 'Medium Priority',
+            self::APPROVED => 'This request is approved and booked successfully',
+            self::DECLINED => 'Request Declined due to certain reasons',
+            self::PENDING => 'Request is yet to be monitored',
         };
     }
 
@@ -22,7 +22,7 @@ enum VenueBookingStatus: string
         return match ($this) {
             self::APPROVED => 'success',
             self::DECLINED => 'danger',
-            self::PENDING => 'secondary',
+            self::PENDING => 'info',
         };
     }
 

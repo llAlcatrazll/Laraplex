@@ -76,6 +76,7 @@ class VenueBookingResource extends Resource
                     ->searchable(),
                 TextColumn::make('eventname'),
                 TextColumn::make('event_facility')
+                    ->sortable()
                     ->searchable(),
                 TextColumn::make('event_date')
                     ->formatStateUsing(fn ($state) => \Carbon\Carbon::parse($state)->format('F j, Y (l)')),
@@ -84,6 +85,8 @@ class VenueBookingResource extends Resource
                 TextColumn::make('ending_time')
                     ->formatStateUsing(fn ($state) => \Carbon\Carbon::parse($state)->format('h:i A')),
                 TextColumn::make('status')
+                    ->color(fn ($record) => $record->status->getColor())
+                    ->tooltip(fn ($record) => $record->status->getDescription())
                     ->badge(),
             ])
             ->filters([

@@ -13,24 +13,16 @@ return new class extends Migration
     {
         Schema::create('actions', function (Blueprint $table) {
             $table->id();
-            $table->id('user_id');
-            $table->id('status');
-            $table->id('table');
+            $table->foreignId('user_id')->constrained()->onDelete('cascade'); // User performing the action
+            $table->unsignedBigInteger('bookable_id')->nullable(); // Polymorphic relation
+            $table->string('bookable_type')->nullable(); // Polymorphic relation type
+            $table->string('action_type'); // e.g., created, updated, declined
+            $table->text('remarks')->nullable();
+            $table->string('status')->nullable();
             $table->timestamps();
         });
     }
 
-    /*
-          'request_id',
-            'user_id',
-            'status',
-            'response',
-            'responded_at',
-            'remarks',
-            'time', */
-    /**
-     * Reverse the migrations.
-     */
     public function down(): void
     {
         Schema::dropIfExists('actions');
