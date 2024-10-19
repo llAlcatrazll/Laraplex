@@ -1,0 +1,27 @@
+[90m= [39m[34;4mIlluminate\Database\Eloquent\Collection[39;24m {#7082
+    [34mall[39m: [
+      [34;4mApp\Models\Action[39;24m {#7086
+        [34mid[39m: [35m1[39m,
+        [34muser_id[39m: [35m1[39m,
+        [34mbookable_id[39m: [36mnull[39m,
+        [34mbookable_type[39m: [36mnull[39m,
+        [34maction_type[39m: "[32mcreated[39m",
+        [34mremarks[39m: "[32mVenue booking created[39m",
+        [34mstatus[39m: [36mnull[39m,
+        [34mcreated_at[39m: "[32m2024-10-18 03:45:29[39m",
+        [34mupdated_at[39m: "[32m2024-10-18 03:45:29[39m",
+      },
+      [34;4mApp\Models\Action[39;24m {#7072
+        [34mid[39m: [35m2[39m,
+        [34muser_id[39m: [35m1[39m,
+        [34mbookable_id[39m: [36mnull[39m,
+        [34mbookable_type[39m: [36mnull[39m,
+        [34maction_type[39m: "[32mcreated[39m",
+        [34mremarks[39m: "[32mVenue booking created[39m",
+        [34mstatus[39m: [36mnull[39m,
+        [34mcreated_at[39m: "[32m2024-10-18 03:46:42[39m",
+        [34mupdated_at[39m: "[32m2024-10-18 03:46:42[39m",
+      },
+    ],
+  }
+

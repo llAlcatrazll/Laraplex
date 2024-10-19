@@ -2,6 +2,7 @@
 
 namespace App\Filament\Dssc\Resources;
 
+use App\Filament\Actions\Tables\RescheduleBookingAction;
 use App\Filament\Dssc\Resources\VenueBookingResource\Pages;
 use App\Models\VenueBooking;
 use Filament\Forms\Components\DatePicker;
@@ -12,6 +13,7 @@ use Filament\Forms\Components\TimePicker;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
+use Filament\Tables\Actions\ActionGroup;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 
@@ -65,21 +67,35 @@ class VenueBookingResource extends Resource
         return $table
             ->columns([
                 //
-                TextColumn::make('booker'),
-                TextColumn::make('college'),
-                TextColumn::make('club'),
+                TextColumn::make('booker')
+                    ->searchable(),
+                TextColumn::make('college')
+                    ->searchable(),
+                TextColumn::make('club')
+                    ->searchable(),
                 TextColumn::make('eventname'),
                 TextColumn::make('event_facility')
+                    ->sortable()
                     ->searchable(),
-                TextColumn::make('event_date'),
-                TextColumn::make('starting_time'),
-                TextColumn::make('ending_time'),
+                TextColumn::make('event_date')
+                    ->formatStateUsing(fn ($state) => \Carbon\Carbon::parse($state)->format('F j, Y (l)')),
+                TextColumn::make('starting_time')
+                    ->formatStateUsing(fn ($state) => \Carbon\Carbon::parse($state)->format('h:i A')),
+                TextColumn::make('ending_time')
+                    ->formatStateUsing(fn ($state) => \Carbon\Carbon::parse($state)->format('h:i A')),
+                TextColumn::make('status')
+                    ->color(fn ($record) => $record->status->getColor())
+                    ->tooltip(fn ($record) => $record->status->getDescription())
+                    ->badge(),
             ])
             ->filters([
                 //
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
+                ActionGroup::make([
+                    RescheduleBookingAction::make(),
+                ]),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([

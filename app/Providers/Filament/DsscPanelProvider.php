@@ -38,8 +38,8 @@ class DsscPanelProvider extends PanelProvider
             ])
             ->discoverWidgets(in: app_path('Filament/Dssc/Widgets'), for: 'App\\Filament\\Dssc\\Widgets')
             ->widgets([
-                Widgets\AccountWidget::class,
-                Widgets\FilamentInfoWidget::class,
+                // Widgets\AccountWidget::class,
+                // Widgets\FilamentInfoWidget::class,
             ])
             ->middleware([
                 EncryptCookies::class,

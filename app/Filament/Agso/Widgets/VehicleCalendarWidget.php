@@ -4,11 +4,11 @@ namespace App\Filament\Agso\Widgets;
 
 use App\Enums\VenueBookingStatus;
 use App\Filament\Agso\Resources\VenueBookingResource;
-use App\Models\VenueBooking;
+use App\Models\VehicleBooking;
 use Saade\FilamentFullCalendar\Data\EventData;
 use Saade\FilamentFullCalendar\Widgets\FullCalendarWidget;
 
-class BookingCalendarWidget extends FullCalendarWidget
+class VehicleCalendarWidget extends FullCalendarWidget
 {
     protected function getOptions(): array
     {
@@ -16,7 +16,7 @@ class BookingCalendarWidget extends FullCalendarWidget
             'initialView' => 'dayGridMonth',
             'height' => 'auto',
             'contentHeight' => 400,
-            'aspectRatio' => 2.0,
+            'aspectRatio' => 3.0,
         ];
     }
 
@@ -25,17 +25,19 @@ class BookingCalendarWidget extends FullCalendarWidget
 
     public function fetchEvents(array $fetchInfo): array
     {
-        return VenueBooking::query()
-            ->where('event_date', '>=', $fetchInfo['start'])
-            ->where('event_date', '<=', $fetchInfo['end'])
-            ->where('status', VenueBookingStatus::APPROVED)
+        return VehicleBooking::query()
+            // ->where('event_date', '>=', $fetchInfo['start'])
+            // ->where('event_date', '<=', $fetchInfo['end'])
+            // ->where('status', VenueBookingStatus::APPROVED)
             ->get()
             ->map(
-                fn (VenueBooking $booking) => EventData::make()
-                    ->id($booking->id)
-                    ->title($booking->eventname)
-                    ->start($booking->event_date.' '.$booking->starting_time)
-                    ->end($booking->event_date.' '.$booking->ending_time)
+                fn (VehicleBooking $vehicle) => EventData::make()
+                    ->id($vehicle->id)
+                    ->title($vehicle->vehicle_type)
+                    ->start($vehicle->date)
+                    ->end($vehicle->date)
+                // ->start($booking->event_date.' '.$booking->starting_time)
+                // ->end($booking->event_date.' '.$booking->ending_time)
                 // ->url(
                 //     url: VenueBookingResource::getUrl(name: 'view', parameters: ['record' => $booking]),
                 //     shouldOpenUrlInNewTab: true

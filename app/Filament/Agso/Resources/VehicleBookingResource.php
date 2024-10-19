@@ -20,6 +20,8 @@ class VehicleBookingResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
+    protected static ?string $navigationGroup = 'Vehicle';
+
     public static function form(Form $form): Form
     {
         return $form
@@ -29,7 +31,7 @@ class VehicleBookingResource extends Resource
                 TextInput::make('requestor')
                     ->placeholder('Juan De la Cruz'),
                 DatePicker::make('date')
-                    ->format('m/d/Y'),
+                    ->format('Y/m/d'),
                 TextInput::make('department')
                     ->placeholder('Department or Organization'),
                 TextInput::make('purpose')
@@ -41,10 +43,16 @@ class VehicleBookingResource extends Resource
     {
         return $table
             ->columns([
-                TextColumn::make('vehicle_type'),
-                TextColumn::make('requestor'),
-                TextColumn::make('date'),
-                TextColumn::make('department'),
+                TextColumn::make('vehicle_type')
+                    ->searchable()
+                    ->sortable(),
+                TextColumn::make('requestor')
+                    ->searchable(),
+                TextColumn::make('date')
+                    ->sortable(),
+                TextColumn::make('department')
+                    ->searchable()
+                    ->sortable(),
                 TextColumn::make('purpose'),
             ])
             ->filters([
@@ -52,6 +60,7 @@ class VehicleBookingResource extends Resource
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
+                Tables\Actions\ViewAction::make(),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
@@ -65,6 +74,11 @@ class VehicleBookingResource extends Resource
         return [
             //
         ];
+    }
+
+    public static function canCreate(): bool
+    {
+        return true;
     }
 
     public static function getPages(): array

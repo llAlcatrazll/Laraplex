@@ -3,7 +3,12 @@
 namespace App\Providers\Filament;
 
 use App\Filament\Agso\Widgets\BookingCalendarWidget;
-use App\Filament\Dssc\Widgets\BookingChart;
+use App\Filament\Agso\Widgets\VehicleCalendarWidget;
+use App\Filament\Agso\Widgets\VenueBookingOverview;
+use App\Filament\Widgets\RecentVehicleBookings;
+use App\Filament\Widgets\RecentVenueBookings;
+use App\Filament\Widgets\UpcomingVehicleBookings;
+use App\Filament\Widgets\UpcomingVenueBookings;
 use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\DisableBladeIconComponents;
 use Filament\Http\Middleware\DispatchServingFilamentEvent;
@@ -12,7 +17,6 @@ use Filament\Panel;
 use Filament\PanelProvider;
 use Filament\Support\Colors\Color;
 use Filament\Support\Enums\MaxWidth;
-use Filament\Widgets;
 use Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse;
 use Illuminate\Cookie\Middleware\EncryptCookies;
 use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken;
@@ -39,15 +43,20 @@ class AgsoPanelProvider extends PanelProvider
             ])
             ->discoverResources(in: app_path('Filament/Agso/Resources'), for: 'App\\Filament\\Agso\\Resources')
             ->discoverPages(in: app_path('Filament/Agso/Pages'), for: 'App\\Filament\\Agso\\Pages')
+
             ->pages([
                 Pages\Dashboard::class,
+                \App\Filament\Agso\Pages\VenueCalendar::class,
             ])
-            ->discoverWidgets(in: app_path('Filament/Agso/Widgets'), for: 'App\\Filament\\Agso\\Widgets')
+            // ->discoverWidgets(in: app_path('Filament/Agso/Widgets'), for: 'App\\Filament\\Agso\\Widgets')
             ->widgets([
-                // Widgets\AccountWidget::class,
-                // Widgets\FilamentInfoWidget::class,
-                // BookingChart::class,
-                // BookingCalendarWidget::class,
+                VehicleCalendarWidget::class,
+                BookingCalendarWidget::class,
+                RecentVenueBookings::class,
+                RecentVehicleBookings::class,
+                UpcomingVenueBookings::class,
+                UpcomingVehicleBookings::class,
+                VenueBookingOverview::class,
             ])
             ->middleware([
                 EncryptCookies::class,
