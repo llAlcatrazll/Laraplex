@@ -7,7 +7,7 @@ use Filament\Pages\Page;
 
 class VehicleCalendar extends Page
 {
-    protected static ?string $navigationIcon = 'heroicon-o-document-text';
+    protected static ?string $navigationIcon = 'heroicon-c-calendar-date-range';
 
     protected static string $view = 'filament.agso.pages.vehicle-calendar';
 

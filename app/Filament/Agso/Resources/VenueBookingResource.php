@@ -96,6 +96,7 @@ class VenueBookingResource extends Resource
             ])
             ->actions([
                 Tables\Actions\EditAction::make()->color('success'),
+                Tables\Actions\ViewAction::make()->color('primary')->url(fn (VenueBooking $record) => VenueBookingResource::getUrl('view', ['record' => $record->id])),
                 ActionGroup::make([
                     ApproveBookingAction::make(),
                     DeclineBookingAction::make(),
@@ -113,6 +114,14 @@ class VenueBookingResource extends Resource
         return false;
     }
 
+    public function resources(): array
+    {
+        return [
+            VenueBookingResource::class,
+            // Other resources...
+        ];
+    }
+
     public static function getRelations(): array
     {
         return [
@@ -124,7 +133,7 @@ class VenueBookingResource extends Resource
     {
         return [
             'index' => Pages\ListVenueBookings::route('/'),
-            // 'create' => Pages\CreateVenueBooking::route('/create'),
+            'view' => Pages\ViewVenueBooking::route('/{record}'), // Add this line
             'edit' => Pages\EditVenueBooking::route('/{record}/edit'),
         ];
     }

@@ -3,7 +3,6 @@
 namespace App\Filament\Agso\Widgets;
 
 use App\Enums\VenueBookingStatus;
-use App\Filament\Agso\Resources\VenueBookingResource;
 use App\Models\VenueBooking;
 use Saade\FilamentFullCalendar\Data\EventData;
 use Saade\FilamentFullCalendar\Widgets\FullCalendarWidget;
@@ -36,10 +35,9 @@ class BookingCalendarWidget extends FullCalendarWidget
                     ->title($booking->eventname)
                     ->start($booking->event_date.' '.$booking->starting_time)
                     ->end($booking->event_date.' '.$booking->ending_time)
-                // ->url(
-                //     url: VenueBookingResource::getUrl(name: 'view', parameters: ['record' => $booking]),
-                //     shouldOpenUrlInNewTab: true
-                // )
+                    ->url(
+                        url: 'venue-bookings' // Adjust based on your needs
+                    )
             )
             ->toArray();
     }
