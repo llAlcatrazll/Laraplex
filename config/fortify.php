@@ -131,8 +131,10 @@ return [
     |
     */
 
-    'views' => true,
-
+    'views' => false,
+    // 'views' => [
+    //     'login' => 'auth.login', // Replace with your actual view path
+    // ],
     /*
     |--------------------------------------------------------------------------
     | Features

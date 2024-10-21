@@ -34,6 +34,7 @@ class AgsoPanelProvider extends PanelProvider
             ->sidebarFullyCollapsibleOnDesktop()
             ->maxContentWidth(MaxWidth::Full)
             ->id('agso')
+            ->spa()
             ->path('agso')
             ->colors([
                 'primary' => Color::Amber,
@@ -46,9 +47,8 @@ class AgsoPanelProvider extends PanelProvider
 
             ->pages([
                 Pages\Dashboard::class,
-                \App\Filament\Agso\Pages\VenueCalendar::class,
             ])
-            // ->discoverWidgets(in: app_path('Filament/Agso/Widgets'), for: 'App\\Filament\\Agso\\Widgets')
+            ->discoverWidgets(in: app_path('Filament/Agso/Widgets'), for: 'App\\Filament\\Agso\\Widgets')
             ->widgets([
                 VehicleCalendarWidget::class,
                 BookingCalendarWidget::class,

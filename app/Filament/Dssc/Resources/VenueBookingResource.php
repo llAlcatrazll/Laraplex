@@ -23,6 +23,8 @@ class VenueBookingResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
+    protected static ?string $navigationGroup = 'Venue';
+
     public static function form(Form $form): Form
     {
         return $form

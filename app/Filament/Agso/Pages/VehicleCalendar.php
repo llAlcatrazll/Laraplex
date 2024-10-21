@@ -2,7 +2,6 @@
 
 namespace App\Filament\Agso\Pages;
 
-use App\Filament\Agso\Widgets\VehicleCalendarWidget;
 use Filament\Pages\Page;
 
 class VehicleCalendar extends Page
@@ -16,7 +15,7 @@ class VehicleCalendar extends Page
     protected function getWidgets(): array
     {
         return [
-            VehicleCalendarWidget::class,
+            \App\Filament\Agso\Widgets\VehicleCalendarWidget::class,
         ];
     }
 }

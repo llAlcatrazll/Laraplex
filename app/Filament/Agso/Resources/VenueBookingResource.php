@@ -133,7 +133,8 @@ class VenueBookingResource extends Resource
     {
         return [
             'index' => Pages\ListVenueBookings::route('/'),
-            'view' => Pages\ViewVenueBooking::route('/{record}'), // Add this line
+            'create' => Pages\CreateVenueBooking::route('/create'),
+            'view' => Pages\ViewVenueBooking::route('/{record}'),
             'edit' => Pages\EditVenueBooking::route('/{record}/edit'),
         ];
     }

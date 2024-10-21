@@ -3,6 +3,7 @@
 namespace App\Filament\Agso\Resources\VehicleBookingResource\Pages;
 
 use App\Filament\Agso\Resources\VehicleBookingResource;
+use App\Filament\Agso\Widgets\VenueBookingOverview;
 use Filament\Actions;
 use Filament\Resources\Components\Tab;
 use Filament\Resources\Pages\ListRecords;
@@ -15,6 +16,13 @@ class ListVehicleBookings extends ListRecords
     {
         return [
             Actions\CreateAction::make(),
+        ];
+    }
+
+    protected function getHeaderWidgets(): array
+    {
+        return [
+            VenueBookingOverview::class, // Full path
         ];
     }
 

@@ -2,6 +2,7 @@
 
 namespace App\Providers\Filament;
 
+use App\Filament\Agso\Widgets\BookingCalendarWidget;
 use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\DisableBladeIconComponents;
 use Filament\Http\Middleware\DispatchServingFilamentEvent;
@@ -10,7 +11,6 @@ use Filament\Panel;
 use Filament\PanelProvider;
 use Filament\Support\Colors\Color;
 use Filament\Support\Enums\MaxWidth;
-use Filament\Widgets;
 use Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse;
 use Illuminate\Cookie\Middleware\EncryptCookies;
 use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken;
@@ -18,6 +18,7 @@ use Illuminate\Routing\Middleware\SubstituteBindings;
 use Illuminate\Session\Middleware\AuthenticateSession;
 use Illuminate\Session\Middleware\StartSession;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
+use Saade\FilamentFullCalendar\FilamentFullCalendarPlugin;
 
 class DsscPanelProvider extends PanelProvider
 {
@@ -27,9 +28,13 @@ class DsscPanelProvider extends PanelProvider
             ->sidebarFullyCollapsibleOnDesktop()
             ->maxContentWidth(MaxWidth::Full)
             ->id('dssc')
+            ->spa()
             ->path('dssc')
             ->colors([
                 'primary' => Color::Amber,
+            ])
+            ->plugins([
+                FilamentFullCalendarPlugin::make(),
             ])
             ->discoverResources(in: app_path('Filament/Dssc/Resources'), for: 'App\\Filament\\Dssc\\Resources')
             ->discoverPages(in: app_path('Filament/Dssc/Pages'), for: 'App\\Filament\\Dssc\\Pages')
@@ -38,8 +43,7 @@ class DsscPanelProvider extends PanelProvider
             ])
             ->discoverWidgets(in: app_path('Filament/Dssc/Widgets'), for: 'App\\Filament\\Dssc\\Widgets')
             ->widgets([
-                // Widgets\AccountWidget::class,
-                // Widgets\FilamentInfoWidget::class,
+                BookingCalendarWidget::class,
             ])
             ->middleware([
                 EncryptCookies::class,
