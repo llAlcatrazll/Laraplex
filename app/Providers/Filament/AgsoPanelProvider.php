@@ -46,9 +46,9 @@ class AgsoPanelProvider extends PanelProvider
             ->discoverPages(in: app_path('Filament/Agso/Pages'), for: 'App\\Filament\\Agso\\Pages')
 
             ->pages([
-                Pages\Dashboard::class,
+                // Pages\Dashboard::class,
             ])
-            ->discoverWidgets(in: app_path('Filament/Agso/Widgets'), for: 'App\\Filament\\Agso\\Widgets')
+            //->discoverWidgets(in: app_path('Filament/Agso/Widgets'), for: 'App\\Filament\\Agso\\Widgets')
             ->widgets([
                 VehicleCalendarWidget::class,
                 BookingCalendarWidget::class,

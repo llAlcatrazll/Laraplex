@@ -2,8 +2,9 @@
 
 namespace App\Filament\Agso\Resources;
 
-use App\Filament\Actions\Tables\ApproveBookingAction;
+use App\Filament\Actions\ApproveBookingAction;
 use App\Filament\Actions\Tables\DeclineBookingAction;
+use App\Filament\Actions\Tables\ViewRequestHistoryAction;
 use App\Filament\Agso\Resources\VenueBookingResource\Pages;
 use App\Models\VenueBooking;
 use Filament\Forms\Components\DatePicker;
@@ -100,6 +101,7 @@ class VenueBookingResource extends Resource
                 ActionGroup::make([
                     ApproveBookingAction::make(),
                     DeclineBookingAction::make(),
+                    ViewRequestHistoryAction::make(),
                 ]),
             ])
             ->bulkActions([

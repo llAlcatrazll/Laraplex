@@ -39,7 +39,7 @@ class DsscPanelProvider extends PanelProvider
             ->discoverResources(in: app_path('Filament/Dssc/Resources'), for: 'App\\Filament\\Dssc\\Resources')
             ->discoverPages(in: app_path('Filament/Dssc/Pages'), for: 'App\\Filament\\Dssc\\Pages')
             ->pages([
-                Pages\Dashboard::class,
+                // Pages\Dashboard::class,
             ])
             ->discoverWidgets(in: app_path('Filament/Dssc/Widgets'), for: 'App\\Filament\\Dssc\\Widgets')
             ->widgets([

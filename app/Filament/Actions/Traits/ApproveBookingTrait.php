@@ -12,26 +12,28 @@ trait ApproveBookingTrait
 
         parent::setUp();
 
-        $this->name ??= 'approve';
+        $this->name('approve');
 
-        $this->color('success');
+        $this->color('info');
 
+        $this->action(function ($record) {
+            dd($record);
+        });
         // $this->visible(function (VenueBooking $record) {
-        //     // dd($record->status);
+        //     dd($record);
 
-        //     return $record->status === VenueBookingStatus::APPROVED;
+        //     return $record->status === VenueBookingStatus::PENDING;
         // });
 
-        $this->icon(VenueBookingStatus::APPROVED->getIcon());
+        // $this->icon(VenueBookingStatus::APPROVED->getIcon());
 
         $this->action(function ($record) {
             $record->update([
                 'status' => VenueBookingStatus::APPROVED,
             ]);
         });
-
         $this->requiresConfirmation();
 
-        $this->successNotificationTitle('Request declined');
+        $this->successNotificationTitle('Request rescheduled');
     }
 }

@@ -8,6 +8,8 @@ enum VenueBookingStatus: string
     case DECLINED = 'declined';
     case PENDING = 'pending';
     case RESCHEDULED = 'rescheduled';
+    //
+    case VIEWHISTORY = 'viewhistory';
 
     public function getDescription(): ?string
     {
@@ -26,6 +28,7 @@ enum VenueBookingStatus: string
             self::DECLINED => 'danger',
             self::PENDING => 'info',
             self::RESCHEDULED => 'primary',
+            self::VIEWHISTORY => 'info',
         };
     }
 
@@ -36,6 +39,7 @@ enum VenueBookingStatus: string
             self::DECLINED => 'heroicon-c-x-circle',
             self::PENDING => 'heroicon-o-check',
             self::RESCHEDULED => 'heroicon-m-calendar-days',
+            self::VIEWHISTORY => 'heroicon-m-calendar-days',
         };
     }
 

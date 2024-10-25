@@ -2,12 +2,13 @@
 
 namespace App\Filament\Dssc\Resources;
 
+use App\Filament\Actions\ApproveBookingAction;
+use App\Filament\Actions\DeclineBookingAction;
 use App\Filament\Actions\Tables\RescheduleBookingAction;
 use App\Filament\Dssc\Resources\VenueBookingResource\Pages;
 use App\Models\VenueBooking;
 use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\Section;
-use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\TimePicker;
 use Filament\Forms\Form;
@@ -48,18 +49,13 @@ class VenueBookingResource extends Resource
                     ->schema([
                         TextInput::make('booker')
                             ->placeholder('Juan De la Cruz'),
-                        Select::make('college')
-                            ->options([
-                                'CCIS' => 'CCIS',
-                                'CABE' => 'CABE',
-                                'CEDAS' => 'CEDAS',
-                            ]),
-                        Select::make('club')
-                            ->options([
-                                'CCIS LGU' => 'CCIS LGU',
-                                'CABE LGU' => 'CABE LGU',
-                                'CEDAS LGU' => 'CEDAS LGU',
-                            ]),
+                        TextInput::make('organization')
+                            ->label('Org / Dept'),
+                        TextInput::make('contactnumber')
+                            ->label('Contact Number')
+                            ->prefix('+63')
+                            ->placeholder('1234-567-8901'),
+
                     ]),
             ]);
     }
@@ -71,10 +67,12 @@ class VenueBookingResource extends Resource
                 //
                 TextColumn::make('booker')
                     ->searchable(),
-                TextColumn::make('college')
+                TextColumn::make('organization')
+                    ->label('Org / Dept')
+                    ->badge()
                     ->searchable(),
-                TextColumn::make('club')
-                    ->searchable(),
+                TextColumn::make('contactnumber')
+                    ->prefix('+63 '),
                 TextColumn::make('eventname'),
                 TextColumn::make('event_facility')
                     ->sortable()
@@ -96,6 +94,8 @@ class VenueBookingResource extends Resource
             ->actions([
                 Tables\Actions\EditAction::make(),
                 ActionGroup::make([
+                    ApproveBookingAction::make(),
+                    DeclineBookingAction::make(),
                     RescheduleBookingAction::make(),
                 ]),
             ])

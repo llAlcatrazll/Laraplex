@@ -19,8 +19,8 @@ return new class extends Migration
             $table->time('starting_time');
             $table->time('ending_time');
             $table->string('event_facility');
-            $table->string('college')->default(null);
-            $table->string('club');
+            $table->string('contactnumber');
+            $table->string('organization');
             $table->string('status')->default('pending');
             // pending | accepted | denied
             $table->boolean('deleted')->default('0');

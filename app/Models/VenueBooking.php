@@ -17,13 +17,13 @@ class VenueBooking extends Model
         'eventname',
         'event_facility',
         'booker',
-        'college',
+        'organization',
         'status',
-        'club',
+        'contactnumber',
     ];
 
     protected $casts = [
-        'status' => VenueBookingStatus::class, // Casts the status to the VenueBookingStatus enum
+        'status' => VenueBookingStatus::class,
     ];
 
     public function actions()

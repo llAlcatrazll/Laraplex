@@ -2,6 +2,7 @@
 
 namespace App\Filament\Dssc\Resources\VenueBookingResource\Pages;
 
+use App\Enums\VenueBookingStatus;
 use App\Filament\Dssc\Resources\VenueBookingResource;
 use App\Models\Action;
 use App\Models\VenueBooking;
@@ -23,7 +24,7 @@ class CreateVenueBooking extends CreateRecord
             'booking_id' => $venueBooking->id, // The created booking's ID
             'action_type' => 'created',
             'remarks' => 'Venue booking created',
-            'status' => $venueBooking->status, // Assuming the booking has a status
+            'status' => VenueBookingStatus::PENDING, // Assuming the booking has a status
         ]);
 
         return $venueBooking;
