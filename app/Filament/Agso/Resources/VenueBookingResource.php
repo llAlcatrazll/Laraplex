@@ -2,7 +2,7 @@
 
 namespace App\Filament\Agso\Resources;
 
-use App\Filament\Actions\ApproveBookingAction;
+use App\Filament\Actions\Tables\ApproveBookingAction;
 use App\Filament\Actions\Tables\DeclineBookingAction;
 use App\Filament\Actions\Tables\ViewRequestHistoryAction;
 use App\Filament\Agso\Resources\VenueBookingResource\Pages;
@@ -99,9 +99,9 @@ class VenueBookingResource extends Resource
                 Tables\Actions\EditAction::make()->color('success'),
                 Tables\Actions\ViewAction::make()->color('primary')->url(fn (VenueBooking $record) => VenueBookingResource::getUrl('view', ['record' => $record->id])),
                 ActionGroup::make([
-                    ApproveBookingAction::make(),
                     DeclineBookingAction::make(),
                     ViewRequestHistoryAction::make(),
+                    ApproveBookingAction::make(),
                 ]),
             ])
             ->bulkActions([
@@ -111,10 +111,10 @@ class VenueBookingResource extends Resource
             ]);
     }
 
-    public static function canCreate(): bool
-    {
-        return false;
-    }
+    // public static function canCreate(): bool
+    // {
+    //     return false;
+    // }
 
     public function resources(): array
     {

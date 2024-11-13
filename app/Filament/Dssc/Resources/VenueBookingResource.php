@@ -2,8 +2,8 @@
 
 namespace App\Filament\Dssc\Resources;
 
-use App\Filament\Actions\ApproveBookingAction;
-use App\Filament\Actions\DeclineBookingAction;
+use App\Filament\Actions\Tables\ApproveBookingAction;
+use App\Filament\Actions\Tables\DeclineBookingAction;
 use App\Filament\Actions\Tables\RescheduleBookingAction;
 use App\Filament\Dssc\Resources\VenueBookingResource\Pages;
 use App\Models\VenueBooking;
@@ -52,9 +52,15 @@ class VenueBookingResource extends Resource
                         TextInput::make('organization')
                             ->label('Org / Dept'),
                         TextInput::make('contactnumber')
-                            ->label('Contact Number')
-                            ->prefix('+63')
-                            ->placeholder('1234-567-8901'),
+                            ->label('placeholder')
+                            ->placeholder('9xx xxx xxxx')
+                            ->mask('999 999 9999')
+                            ->prefix('+63 ')
+                            ->rule(fn () => function ($a, $v, $f) {
+                                if (! preg_match('/^9.*/', $v)) {
+                                    $f('Incorrect number format');
+                                }
+                            }),
 
                     ]),
             ]);
@@ -94,9 +100,9 @@ class VenueBookingResource extends Resource
             ->actions([
                 Tables\Actions\EditAction::make(),
                 ActionGroup::make([
-                    ApproveBookingAction::make(),
                     DeclineBookingAction::make(),
                     RescheduleBookingAction::make(),
+                    ApproveBookingAction::make(),
                 ]),
             ])
             ->bulkActions([

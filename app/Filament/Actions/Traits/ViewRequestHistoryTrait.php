@@ -3,6 +3,7 @@
 namespace App\Filament\Actions\Traits;
 
 use App\Enums\VenueBookingStatus;
+use App\Models\Action;
 use App\Models\VenueBooking;
 
 trait ViewRequestHistoryTrait
@@ -24,15 +25,17 @@ trait ViewRequestHistoryTrait
         $this->icon(VenueBookingStatus::VIEWHISTORY->getIcon());
 
         $this->modalContent(function (VenueBooking $record) {
-            // $record->load([
-            //     'actions' => fn ($q) => $q->orderBy('created_at', 'desc'),
-            //     'actions.attachment',
-            //     'attachment',
-            // ]);
+            $actions = Action::where('bookable_id', $record->id)
+                ->where('bookable_type', VenueBooking::class)
+                ->orderBy('created_at', 'desc')
+                ->get();
 
-            // return view('filament.request.history', [
-            //     'request' => $record,
-            // ]);
+            dd(Action::where('id'));
+
+            return view('filament.booking.history', [
+                'booking' => $record,
+                'actions' => $actions,
+            ]);
         });
     }
 }

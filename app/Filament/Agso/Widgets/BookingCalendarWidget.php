@@ -36,7 +36,7 @@ class BookingCalendarWidget extends FullCalendarWidget
                     ->start($booking->event_date.' '.$booking->starting_time)
                     ->end($booking->event_date.' '.$booking->ending_time)
                     ->url(
-                        url: 'venue-bookings' // Adjust based on your needs
+                        url: 'venue-bookings'.'/'.$booking->id // Adjust based on your needs
                     )
             )
             ->toArray();

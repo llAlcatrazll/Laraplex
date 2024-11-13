@@ -3,6 +3,7 @@
 namespace App\Providers\Filament;
 
 use App\Filament\Agso\Widgets\BookingCalendarWidget;
+use App\Filament\Widgets\UpcomingVenueBookings;
 use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\DisableBladeIconComponents;
 use Filament\Http\Middleware\DispatchServingFilamentEvent;
@@ -44,6 +45,7 @@ class DsscPanelProvider extends PanelProvider
             ->discoverWidgets(in: app_path('Filament/Dssc/Widgets'), for: 'App\\Filament\\Dssc\\Widgets')
             ->widgets([
                 BookingCalendarWidget::class,
+                UpcomingVenueBookings::class,
             ])
             ->middleware([
                 EncryptCookies::class,
